@@ -1,4 +1,5 @@
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
@@ -18,8 +19,17 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={openSans.className}>{children}</body>
+      <html lang="en" suppressHydrationWarning>
+        <body className={openSans.className}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            storageKey="discord-clone-theme"
+          >
+            {children}
+          </ThemeProvider>
+        </body>
       </html>
     </ClerkProvider>
   );
