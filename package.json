@@ -39,6 +39,7 @@
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.2.2",
     "uploadthing": "^5.3.3",
+    "uuid": "^9.0.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {
