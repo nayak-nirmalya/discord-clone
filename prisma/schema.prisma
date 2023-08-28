@@ -35,3 +35,32 @@ model Server {
 
   @@index([profileId])
 }
+
+enum MemberRole {
+  ADMIN
+  MODERATOR
+  GUEST
+}
+
+model Member {
+  id   String     @id @default(uuid())
+  role MemberRole @default(GUEST)
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+
+  messages       Message[]
+  directMessages DirectMessage[]
+
+  conversationsInitiated Conversation[] @relation("MemberOne")
+  conversationsReceived  Conversation[] @relation("MemberTwo")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([serverId])
+}
