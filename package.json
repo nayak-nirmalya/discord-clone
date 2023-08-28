@@ -43,6 +43,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.2",
     "prisma": "^5.2.0"
   }
 }
