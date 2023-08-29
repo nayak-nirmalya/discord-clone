@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { NavigationAction } from "@/components/navigation/navigation-action";
 
 export async function NavigationSidebar() {
   const profile = await currentProfile();
@@ -21,7 +22,7 @@ export async function NavigationSidebar() {
 
   return (
     <div className="space-y-4 flex flex-col h-full items-center text-primary w-full dark:bg-[#1e1f22] py-3">
-      Navigation Sidebar
+      <NavigationAction />
     </div>
   );
 }
