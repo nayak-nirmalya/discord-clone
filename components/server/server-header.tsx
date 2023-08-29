@@ -2,13 +2,22 @@
 
 import React from "react";
 import { MemberRole } from "@prisma/client";
-import { ChevronDown, UserPlus } from "lucide-react";
+import {
+  ChevronDown,
+  LogOutIcon,
+  PlusCircle,
+  Settings,
+  Trash,
+  UserPlus,
+  Users
+} from "lucide-react";
 
 import { ServerWithMembersWithProfiles } from "@/types";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
@@ -34,6 +43,37 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
           <DropdownMenuItem className="text-indigo-600 dark:text-indigo-400 px-3 py-2 text-sm cursor-pointer">
             Invite People
             <UserPlus className="h-4 w-4 ml-auto" />
+          </DropdownMenuItem>
+        )}
+        {isAdmin && (
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
+            Server Settings
+            <Settings className="h-4 w-4 ml-auto" />
+          </DropdownMenuItem>
+        )}
+        {isAdmin && (
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
+            Manage Members
+            <Users className="h-4 w-4 ml-auto" />
+          </DropdownMenuItem>
+        )}
+        {isModerator && (
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
+            Create Channel
+            <PlusCircle className="h-4 w-4 ml-auto" />
+          </DropdownMenuItem>
+        )}
+        {isModerator && <DropdownMenuSeparator />}
+        {isAdmin && (
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer text-rose-500">
+            Delete Server
+            <Trash className="h-4 w-4 ml-auto" />
+          </DropdownMenuItem>
+        )}
+        {!isAdmin && (
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer text-rose-500">
+            Leave Server
+            <LogOutIcon className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
