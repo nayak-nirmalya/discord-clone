@@ -47,5 +47,13 @@ export async function ServerSidebar({ serverId }: { serverId: string }) {
 
   if (!server) return redirect("/");
 
-  return <div>ServerSidebar</div>;
+  const role = server.members.find(
+    (member) => member.profileId === profile.id
+  )?.role;
+
+  return (
+    <div className="flex flex-col h-full text-primary w-full dark:bg-[#2b2d31] bg-[#f2f3f5]">
+      ServerSidebar
+    </div>
+  );
 }
