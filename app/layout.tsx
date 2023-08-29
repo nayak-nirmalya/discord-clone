@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
@@ -28,6 +29,7 @@ export default function RootLayout({
             enableSystem
             storageKey="discord-clone-theme"
           >
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>
