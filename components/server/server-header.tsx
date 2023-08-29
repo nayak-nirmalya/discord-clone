@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
-import { Server } from "@prisma/client";
+import { MemberRole } from "@prisma/client";
+
+import { ServerWithMembersWithProfiles } from "@/types";
 
 interface ServerHeaderProps {
-  server: Server;
+  server: ServerWithMembersWithProfiles;
+  role?: MemberRole;
 }
 
-export function ServerHeader() {
+export function ServerHeader({ server, role }: ServerHeaderProps) {
   return <div>ServerHeader</div>;
 }
