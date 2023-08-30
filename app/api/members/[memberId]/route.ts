@@ -9,7 +9,6 @@ export async function DELETE(
 ) {
   try {
     const { searchParams } = new URL(req.url);
-    const { role } = await req.json();
 
     const profile = await currentProfile();
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });

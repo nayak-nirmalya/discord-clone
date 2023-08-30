@@ -53,7 +53,7 @@ export function MembersModal() {
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfiles };
 
-  const onKick = async (memberId: string, role: MemberRole) => {
+  const onKick = async (memberId: string) => {
     try {
       setLoadingId(memberId);
 
@@ -154,7 +154,7 @@ export function MembersModal() {
                           </DropdownMenuPortal>
                         </DropdownMenuSub>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => onKick(member.id)}>
                           <Gavel className="h-4 w-4 mr-2" />
                           Kick
                         </DropdownMenuItem>
