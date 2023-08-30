@@ -59,7 +59,7 @@ export function MembersModal() {
 
       const url = qs.stringifyUrl({
         url: `/api/members/${memberId}`,
-        query: { serverId: server?.id, memberId }
+        query: { serverId: server?.id }
       });
 
       const response = await axios.patch(url, { role });
