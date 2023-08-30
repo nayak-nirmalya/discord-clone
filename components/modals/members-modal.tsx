@@ -12,6 +12,9 @@ import {
   ShieldQuestion
 } from "lucide-react";
 import { MemberRole } from "@prisma/client";
+import qs from "query-string";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 import {
   Dialog,
@@ -45,6 +48,7 @@ const roleIconMap = {
 export function MembersModal() {
   const { isOpen, onOpen, onClose, type, data } = useModal();
   const [loadingId, setLoadingId] = useState("");
+  const router = useRouter();
 
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfiles };
@@ -52,6 +56,16 @@ export function MembersModal() {
   const onRoleChange = async (memberId: string, role: MemberRole) => {
     try {
       setLoadingId(memberId);
+
+      const url = qs.stringifyUrl({
+        url: `/api/members/${memberId}`,
+        query: { serverId: server?.id, memberId }
+      });
+
+      const response = await axios.patch(url, { role });
+
+      router.refresh();
+      onOpen("members", { server: response.data });
     } catch (error) {
       console.error(error);
     } finally {
@@ -96,14 +110,20 @@ export function MembersModal() {
                           </DropdownMenuSubTrigger>
                           <DropdownMenuPortal>
                             <DropdownMenuSubContent>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => onRoleChange(member.id, "GUEST")}
+                              >
                                 <Shield className="h-4 w-4 mr-2" />
                                 Guest
                                 {member.role === "GUEST" && (
                                   <Check className="h4 w-4 ml-auto" />
                                 )}
                               </DropdownMenuItem>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  onRoleChange(member.id, "MODERATOR")
+                                }
+                              >
                                 <ShieldCheck className="h-4 w-4 mr-2" />
                                 Moderator
                                 {member.role === "MODERATOR" && (
