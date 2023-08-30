@@ -20,7 +20,7 @@ const roleIconMap = {
   [MemberRole.MODERATOR]: (
     <ShieldCheck className="h-4 w-4 mr-2 text-indigo-500" />
   ),
-  [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 mr-2 text-indigo-500" />
+  [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 mr-2 text-rose-500" />
 };
 
 export async function ServerSidebar({ serverId }: { serverId: string }) {
