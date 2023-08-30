@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   ShieldQuestion
 } from "lucide-react";
+import { MemberRole } from "@prisma/client";
 
 import {
   Dialog,
@@ -47,6 +48,16 @@ export function MembersModal() {
 
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfiles };
+
+  const onRoleChange = async (memberId: string, role: MemberRole) => {
+    try {
+      setLoadingId(memberId);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoadingId("");
+    }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
