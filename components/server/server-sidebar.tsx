@@ -8,6 +8,8 @@ import { db } from "@/lib/db";
 import { ServerHeader } from "@/components/server/server-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ServerSearch } from "@/components/server/server-search";
+import { Separator } from "@/components/ui/separator";
+import { ServerSection } from "@/components/server/server-section";
 
 const iconMap = {
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -115,6 +117,12 @@ export async function ServerSidebar({ serverId }: { serverId: string }) {
             ]}
           />
         </div>
+        <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
+        {!!textChannels?.length && (
+          <div className="mb-2">
+            <ServerSection />
+          </div>
+        )}
       </ScrollArea>
     </div>
   );
