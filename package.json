@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "@hookform/resolvers": "^3.3.0",
     "@prisma/client": "^5.2.0",
     "@radix-ui/react-avatar": "^1.0.3",
@@ -31,6 +33,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "emoji-mart": "^5.5.2",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.12",
     "lucide-react": "^0.269.0",
