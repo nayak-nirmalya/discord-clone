@@ -26,11 +26,11 @@ export default async function ChannelIdPage({
     where: { id: channelId }
   });
 
-  const members = await db.member.findFirst({
+  const member = await db.member.findFirst({
     where: { serverId: serverId, profileId: profile.id }
   });
 
-  if (!channel || !members) return redirect("/");
+  if (!channel || !member) return redirect("/");
 
   return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
@@ -39,7 +39,20 @@ export default async function ChannelIdPage({
         serverId={channel.serverId}
         type="channel"
       />
-      <ChatMessages />
+      <ChatMessages
+        member={member}
+        name={channel.name}
+        chatId={channel.id}
+        type="channel"
+        apiUrl="/api/messages"
+        socketUrl="/api/socket/messages"
+        socketQuery={{
+          channelId: channel.id,
+          serverId: channel.serverId
+        }}
+        paramKey="channelId"
+        paramValue={channel.id}
+      />
       <ChatInput
         name={channel.name}
         type="channel"
