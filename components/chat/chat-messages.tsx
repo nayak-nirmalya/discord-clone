@@ -5,6 +5,7 @@ import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
 import { ChatWelcome } from "@/components/chat/chat-welcome";
+import { ChatItem } from "@/components/chat/chat-item";
 import { useChatQuery } from "@/hooks/use-chat-query";
 
 interface ChatMessagesProps {
@@ -73,7 +74,15 @@ export function ChatMessages({
         {data?.pages.map((group, index) => (
           <Fragment key={index}>
             {group?.items.map((message: MessagesWithMemberWithProfile) => (
-              <div key={message.id}>{message.content}</div>
+              <ChatItem
+                key={message.id}
+                currentMember={member}
+                id={message.id}
+                content={message.content}
+                fileUrl={message.fileUrl}
+                deleted={message.deleted}
+                timestamp={}
+              />
             ))}
           </Fragment>
         ))}
