@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Member, MemberRole, Profile } from "@prisma/client";
 import {
   Edit,
@@ -10,10 +10,21 @@ import {
   Trash
 } from "lucide-react";
 import Image from "next/image";
+import * as z from "zod";
+import axios from "axios";
+import qs from "query-string";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { cn } from "@/lib/utils";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem
+} from "@/components/ui/form";
 
 interface ChatItemProps {
   id: string;
@@ -34,6 +45,10 @@ const roleIconMap = {
   ADMIN: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />
 };
 
+const formSchema = z.object({
+  content: z.string().min(1)
+});
+
 export function ChatItem({
   id,
   content,
@@ -48,6 +63,17 @@ export function ChatItem({
 }: ChatItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      content
+    }
+  });
+
+  useEffect(() => {
+    form.reset({ content });
+  }, [content, form]);
 
   const fileType = fileUrl?.split(".").pop();
 
