@@ -3,6 +3,7 @@
 import React, { Fragment } from "react";
 import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
+import { format } from "date-fns";
 
 import { ChatWelcome } from "@/components/chat/chat-welcome";
 import { ChatItem } from "@/components/chat/chat-item";
@@ -25,6 +26,8 @@ type MessagesWithMemberWithProfile = Message & {
     profile: Profile;
   };
 };
+
+const DATE_FORMAT = "d MMM yyyy, HH:mm";
 
 export function ChatMessages({
   name,
@@ -77,11 +80,18 @@ export function ChatMessages({
               <ChatItem
                 key={message.id}
                 currentMember={member}
+                member={message.member}
                 id={message.id}
                 content={message.content}
                 fileUrl={message.fileUrl}
                 deleted={message.deleted}
-                timestamp={}
+                timestamp={format(
+                  new Date(message.createdAt),
+                  DATE_FORMAT
+                )}
+                isUpdated={message.updatedAt !== message.createdAt}
+                socketQuery={socketQuery}
+                socketUrl={socketUrl}
               />
             ))}
           </Fragment>
