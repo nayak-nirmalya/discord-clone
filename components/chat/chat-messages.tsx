@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { ChatWelcome } from "@/components/chat/chat-welcome";
 import { ChatItem } from "@/components/chat/chat-item";
 import { useChatQuery } from "@/hooks/use-chat-query";
+import { useChatSocket } from "@/hooks/use-chat-socket";
 
 interface ChatMessagesProps {
   name: string;
@@ -41,6 +42,9 @@ export function ChatMessages({
   type
 }: ChatMessagesProps) {
   const queryKey = `chat:${chatId}`;
+  const addKey = `chat:${chatId}:messages`;
+  const updateKey = `chat:${chatId}:messages:update`;
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery({
       queryKey,
@@ -48,6 +52,11 @@ export function ChatMessages({
       paramKey,
       paramValue
     });
+  useChatSocket({
+    queryKey,
+    addKey,
+    updateKey
+  });
 
   if (status === "loading")
     return (
