@@ -108,6 +108,33 @@ export default async function handler(
         }
       });
     }
+
+    if (req.method === "PATCH") {
+      if (!isMessageOwner)
+        return res.status(401).json({ error: "Unauthorized" });
+
+      message = await db.message.update({
+        where: {
+          id: messageId as string
+        },
+        data: {
+          content
+        },
+        include: {
+          member: {
+            include: {
+              profile: true
+            }
+          }
+        }
+      });
+    }
+
+    const updateKey = `chat:${channelId}:messages:update`;
+
+    res?.socket?.server?.io?.emit(updateKey, message);
+
+    return res.status(200).json(message);
   } catch (error) {
     console.error("[MESSAGES_ID]", error);
     return res.status(500).json({ error: "Internal Server Error" });
