@@ -85,8 +85,19 @@ export function ChatItem({
     }
   });
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const isLoading = form.formState.isSubmitting;
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const url = qs.stringifyUrl({
+        url: `${socketUrl}/${id}`,
+        query: socketQuery
+      });
+
+      await axios.patch(url, values);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -181,6 +192,7 @@ export function ChatItem({
                       <FormControl>
                         <div className="relative w-full">
                           <Input
+                            disabled={isLoading}
                             placeholder="Edited message"
                             className="p-2 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200"
                             {...field}
@@ -190,7 +202,7 @@ export function ChatItem({
                     </FormItem>
                   )}
                 />
-                <Button size="sm" variant="primary">
+                <Button disabled={isLoading} size="sm" variant="primary">
                   Save
                 </Button>
               </form>
