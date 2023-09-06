@@ -25,6 +25,8 @@ import {
   FormField,
   FormItem
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface ChatItemProps {
   id: string;
@@ -70,6 +72,10 @@ export function ChatItem({
       content
     }
   });
+
+  const onSubmit = (values: any) => {
+    console.log(values);
+  };
 
   useEffect(() => {
     form.reset({ content });
@@ -148,6 +154,38 @@ export function ChatItem({
                 </span>
               )}
             </p>
+          )}
+          {!fileUrl && isEditing && (
+            <Form {...form}>
+              <form
+                className="flex items-center w-full gap-x-2 pt-2"
+                onSubmit={form.handleSubmit(onSubmit)}
+              >
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <div className="relative w-full">
+                          <Input
+                            placeholder="Edited message"
+                            className="p-2 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button size="sm" variant="primary">
+                  Save
+                </Button>
+              </form>
+              <span className="text-[10px] mt-1 text-zinc-400">
+                Press escape to cancel, enter to save
+              </span>
+            </Form>
           )}
         </div>
       </div>
