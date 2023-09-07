@@ -16,11 +16,11 @@ type MessageWithMemberWithProfile = Message & {
   };
 };
 
-export function useChatSocket({
+export const useChatSocket = ({
   addKey,
   updateKey,
   queryKey
-}: ChatSocketProps) {
+}: ChatSocketProps) => {
   const { socket } = useSocket();
   const queryClient = useQueryClient();
 
@@ -83,4 +83,4 @@ export function useChatSocket({
       socket.off(updateKey);
     };
   }, [queryClient, addKey, queryKey, socket, updateKey]);
-}
+};
