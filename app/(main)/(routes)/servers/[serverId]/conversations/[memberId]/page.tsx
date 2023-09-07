@@ -71,7 +71,7 @@ export default async function MemberIdPage({
       <ChatInput
         name={otherMember.profile.name}
         type="conversation"
-        apiUrl="/api/sokcet/direct-messages"
+        apiUrl="/api/socket/direct-messages"
         query={{
           conversationId: conversation.id
         }}
