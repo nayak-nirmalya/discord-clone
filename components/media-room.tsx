@@ -17,14 +17,12 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    if (!user?.firstName || user?.lastName) return;
-
-    const name = `${user.firstName} ${user.lastName}`;
+    if (!user?.firstName) return;
 
     (async () => {
       try {
         const response = await fetch(
-          `/api/livekit?room=${chatId}&username=${name}`
+          `/api/livekit?room=${chatId}&username=${user.firstName}`
         );
         const data = await response.json();
         setToken(data.token);
@@ -32,7 +30,7 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
         console.error(error);
       }
     })();
-  }, [user?.firstName, user?.lastName, chatId]);
+  }, [user?.firstName, chatId]);
 
   if (token === "")
     return (
