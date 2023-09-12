@@ -10,7 +10,8 @@ const nextConfig = {
   },
   images: {
     domains: ["uploadthing.com"]
-  }
+  },
+  swcMinify: false
 };
 
 module.exports = nextConfig;
