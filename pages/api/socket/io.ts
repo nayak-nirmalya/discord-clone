@@ -10,6 +10,8 @@ export const config = {
   }
 };
 
+export const dynamic = 'force-dynamic'; // Отключаем статическую генерацию
+
 const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
   if (!res.socket.server.io) {
     const path = "/api/socket/io";
