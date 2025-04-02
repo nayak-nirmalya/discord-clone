@@ -3,7 +3,7 @@ import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 import { ServerSidebar } from "@/components/server/server-sidebar";
 
 export default async function ServerIdLayout({
