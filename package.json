@@ -40,6 +40,7 @@
     "emoji-mart": "^5.5.2",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.12",
+    "firebase": "^11.6.0",
     "livekit-client": "^1.13.2",
     "livekit-server-sdk": "^1.2.6",
     "lucide-react": "^0.269.0",
