@@ -13,9 +13,9 @@ import { ClerkProvider } from "@clerk/nextjs";
 const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Discord Clone",
+  title: "RuscordX | Российский дискорд",
   description:
-    "Discord Clone with Next.js, React.js, TailWindCSS & TypeScript."
+    "RuscordX - Российский дискорд. Приятное место для общения. Добро пожаловать!"
 };
 
 export default function RootLayout({
