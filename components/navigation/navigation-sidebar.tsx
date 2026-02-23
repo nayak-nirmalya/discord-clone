@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 
 import { NavigationAction } from "@/components/navigation/navigation-action";
 import { Separator } from "@/components/ui/separator";

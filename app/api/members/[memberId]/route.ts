@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 
 export async function DELETE(
   req: Request,

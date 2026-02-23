@@ -3,7 +3,7 @@ import { MemberRole } from "@prisma/client";
 
 import { NextApiResponseServerIo } from "@/types";
 import { currentProfilePages } from "@/lib/current-profile-pages";
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 
 export default async function handler(
   req: NextApiRequest,

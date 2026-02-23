@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { db } from "@/lib/prisma";
 
 export const getOrCreateConversation = async (
   memberOneId: string,
